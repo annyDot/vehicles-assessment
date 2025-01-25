@@ -1,0 +1,35 @@
+@use 'input' as *;
+@use 'colors' as *;
+@use 'fonts' as *;
+@use 'overrides' as *;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.5;
+    color: $black;
+    background-color: $white;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+.error-message {
+    font-size: $font-size-xs;
+    color: $danger;
+    margin-top: 0.25rem;
+}

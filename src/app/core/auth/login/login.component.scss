@@ -1,0 +1,50 @@
+@use 'colors' as *;
+@use 'mixins' as *;
+@use 'fonts' as *;
+
+.login-wrapper {
+  height: calc(100vh - 150px);
+  @include flex-justify-center;
+  padding: 1rem;
+}
+
+.login-container {
+  background-color: $snow;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 450px;
+
+  h2 {
+    margin-bottom: 2rem;
+    color: $gray-dark;
+  }
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  font-size: $font-size-sm;
+  color: $gray;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: $font-weight-medium;
+}
+
+:host::ng-deep p-button {
+  @include flex-justify-center;
+
+  button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .login-container {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}

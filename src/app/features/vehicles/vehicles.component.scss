@@ -1,0 +1,12 @@
+@use 'mixins' as *;
+
+.search-container {
+    @include flex-align-center;  
+    margin: 1rem;
+
+    label {
+        white-space: nowrap;
+        margin-right: 1rem;
+    }
+}
+

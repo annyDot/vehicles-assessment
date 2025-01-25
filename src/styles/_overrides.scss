@@ -1,0 +1,22 @@
+@use 'colors' as *;
+
+// Sweet Alert
+.swal2-confirm {
+    background-color: $primary !important;
+    border: none !important;
+    color: $white !important;
+}
+
+.swal2-cancel {
+    background-color: $white !important;
+    border: none !important;
+    color: $primary !important;
+}
+
+.swal2-confirm:hover {
+    background-color: $primary-dark !important;
+}
+
+.swal2-cancel:hover {
+    background-color: $snow !important;
+}

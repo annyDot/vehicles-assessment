@@ -1,0 +1,10 @@
+@use 'mixins' as *;
+@use 'colors' as *;
+
+:host::ng-deep .p-toolbar {
+    flex-wrap: unset;
+}
+
+h2 {
+    color: $primary;
+}

@@ -1,0 +1,43 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <h2>Please Sign In to Continue...</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="form-group">
+        <label for="username">Email</label>
+        <input
+          pInputText
+          type="email"
+          id="username"
+          formControlName="username"
+          placeholder="Enter your email"
+        />
+        <app-error-message
+          [control]="loginForm.get('username')"
+          errorMessage="Username is required."
+        ></app-error-message>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          pInputText
+          type="password"
+          id="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+        <app-error-message
+          [control]="loginForm.get('password')"
+          errorMessage="Password is required."
+        ></app-error-message>
+      </div>
+
+      <p-button
+        type="submit"
+        label="Login"
+        styleClass="p-button-raised submit-button"
+        [disabled]="loginForm.invalid"
+      ></p-button>
+    </form>
+  </div>
+</div>

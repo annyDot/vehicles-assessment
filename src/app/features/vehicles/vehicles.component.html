@@ -1,0 +1,61 @@
+<div class="table-container">
+  <div class="search-container">
+    <label for="search">Search vehicles</label>
+    <div class="p-inputgroup">
+      <input
+        pInputText
+        type="search"
+        id="search"
+        placeholder="Search..."
+        [(ngModel)]="searchQuery"
+        (ngModelChange)="onSearch($event)"
+      />
+      <span class="p-inputgroup-addon">
+        <i class="pi pi-search"></i>
+      </span>
+    </div>
+  </div>
+
+  <p-table
+    *ngIf="vehicles$ | async as vehicles"
+    [value]="vehicles"
+    [paginator]="true"
+    [rows]="10"
+    [responsiveLayout]="'scroll'"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Vehicle Name</th>
+        <th>Manufacturer</th>
+        <th>Model</th>
+        <th>Type</th>
+        <th>Fuel Type</th>
+        <th>License Plate</th>
+        <th>Year</th>
+        <th>Status</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-vehicle>
+      <tr>
+        <td>{{ vehicle.name | vehicleName }}</td>
+        <td>{{ vehicle.manufacturer }}</td>
+        <td>{{ vehicle.model }}</td>
+        <td>{{ vehicle.type }}</td>
+        <td>{{ vehicle.fuelType }}</td>
+        <td>{{ vehicle.licensePlate }}</td>
+        <td>{{ vehicle.year }}</td>
+        <td>
+          <i
+            class="pi"
+            [ngClass]="{
+              'pi-check': vehicle.active,
+              'pi-times': !vehicle.active
+            }"
+            [ngStyle]="{ color: vehicle.active ? 'green' : 'red' }"
+          ></i>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
