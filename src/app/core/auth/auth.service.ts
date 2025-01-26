@@ -3,24 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService as Auth0Service } from '@auth0/auth0-angular';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import {
-  BehaviorSubject,
-  Observable,
-  of,
-  Subject,
-  switchMap,
-  takeUntil,
-} from 'rxjs';
-
-interface UserInfo {
-  email: string;
-  email_verified: boolean;
-  name: string;
-  nickname: string;
-  picture: string;
-  sub: string;
-  updated_at: string;
-}
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
