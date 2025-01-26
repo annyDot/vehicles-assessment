@@ -4,11 +4,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from '@auth0/auth0-angular';
-import { ComponentsModule } from './shared/components/components.module';
 import { environment } from 'src/environments/environment';
 import { LoginComponent } from './core/auth/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ErrorInterceptor } from './shared/interceptors/http-error-interceptor';
+import { ComponentsModule } from './core/components/components.module';
+import { ErrorInterceptor } from './core/interceptors/http-error-interceptor';
 
 @NgModule({
   declarations: [AppComponent],

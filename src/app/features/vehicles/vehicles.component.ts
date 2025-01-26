@@ -1,33 +1,41 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { VehicleService } from './services/vehicle.service';
 import { VehicleModel } from './models/vehicle.model';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-vehicles',
   templateUrl: './vehicles.component.html',
   styleUrls: ['./vehicles.component.scss'],
 })
-export class VehiclesComponent implements OnInit {
-  vehicles$!: Observable<VehicleModel[]>;
-  filteredVehicles: VehicleModel[] = [];
-  searchQuery: string = '';
-
+export class VehiclesComponent implements OnInit, OnDestroy {
   private vehicleService = inject(VehicleService);
+  private vehicles: VehicleModel[] = [];
+  private destroy$ = new Subject<void>();
+
+  filteredVehicles$ = new BehaviorSubject<VehicleModel[]>([]);
 
   ngOnInit(): void {
-    this.vehicles$ = this.vehicleService
-      .getVehicles()
-      .pipe(map((vehicles) => this.filterVehicles(vehicles)));
+    this.getVehicles();
   }
 
-  filterVehicles(vehicles: VehicleModel[]): VehicleModel[] {
-    if (!this.searchQuery) {
-      return vehicles;
+  private getVehicles() {
+    this.vehicleService
+      .getVehicles()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((vehicles) => {
+        this.vehicles = vehicles;
+        this.filteredVehicles$.next(vehicles);
+      });
+  }
+
+  private filterVehicles(query: string): VehicleModel[] {
+    if (!query) {
+      return this.vehicles;
     }
 
-    const lowerCaseQuery = this.searchQuery.toLowerCase();
+    const lowerCaseQuery = query.toLowerCase();
     const searchFields: (keyof VehicleModel)[] = [
       'name',
       'manufacturer',
@@ -38,17 +46,22 @@ export class VehiclesComponent implements OnInit {
       'licensePlate',
     ];
 
-    return vehicles.filter((vehicle) =>
+    return this.vehicles.filter((vehicle) =>
       searchFields.some((field) =>
         vehicle[field]?.toString().toLowerCase().includes(lowerCaseQuery)
       )
     );
   }
 
-  onSearch(query: string): void {
-    this.searchQuery = query;
-    this.vehicles$ = this.vehicleService
-      .getVehicles()
-      .pipe(map((vehicles) => this.filterVehicles(vehicles)));
+  onSearch(event: Event): void {
+    const query = (event.target as HTMLInputElement).value;
+    const filteredVehicles = this.filterVehicles(query);
+
+    this.filteredVehicles$.next(filteredVehicles);
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

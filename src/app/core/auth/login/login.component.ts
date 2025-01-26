@@ -6,12 +6,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { passwordValidator } from 'src/app/shared/validators/password.validator';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { ErrorMessageComponent } from 'src/app/shared/components/error-message/error-message.component';
 import { Router } from '@angular/router';
+import { ErrorMessageComponent } from '../../components/error-message/error-message.component';
+import { passwordValidator } from '../../validators/password.validator';
 
 @Component({
   selector: 'app-login',

@@ -7,8 +7,7 @@
         type="search"
         id="search"
         placeholder="Search..."
-        [(ngModel)]="searchQuery"
-        (ngModelChange)="onSearch($event)"
+        (input)="onSearch($event)"
       />
       <span class="p-inputgroup-addon">
         <i class="pi pi-search"></i>
@@ -17,8 +16,7 @@
   </div>
 
   <p-table
-    *ngIf="vehicles$ | async as vehicles"
-    [value]="vehicles"
+    [value]="(filteredVehicles$ | async) || []"
     [paginator]="true"
     [rows]="10"
     [responsiveLayout]="'scroll'"
