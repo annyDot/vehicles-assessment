@@ -2,21 +2,21 @@
 
 // Sweet Alert
 .swal2-confirm {
-    background-color: $primary !important;
-    border: none !important;
-    color: $white !important;
+    background-color: $primary ;
+    border: none;
+    color: $white ;
 }
 
 .swal2-cancel {
-    background-color: $white !important;
-    border: none !important;
-    color: $primary !important;
+    background-color: $white;
+    border: none;
+    color: $primary;
 }
 
 .swal2-confirm:hover {
-    background-color: $primary-dark !important;
+    background-color: $primary-dark;
 }
 
 .swal2-cancel:hover {
-    background-color: $snow !important;
+    background-color: $snow;
 }

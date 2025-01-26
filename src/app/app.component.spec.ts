@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './core/components/navbar/navbar.component';
 import { AuthModule, AuthService } from '@auth0/auth0-angular';
 import { MockModule, MockProvider } from 'ng-mocks';
-import { HttpClient } from '@angular/common/http';
 import { ToolbarModule } from 'primeng/toolbar';
 import { By } from '@angular/platform-browser';
 import { ButtonModule } from 'primeng/button';

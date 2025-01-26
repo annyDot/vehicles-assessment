@@ -14,44 +14,49 @@
       </span>
     </div>
   </div>
-
   <p-table
     [value]="(filteredVehicles$ | async) || []"
     [paginator]="true"
     [rows]="10"
     [responsiveLayout]="'scroll'"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
   >
     <ng-template pTemplate="header">
       <tr>
-        <th>Vehicle Name</th>
-        <th>Manufacturer</th>
-        <th>Model</th>
-        <th>Type</th>
-        <th>Fuel Type</th>
-        <th>License Plate</th>
-        <th>Year</th>
-        <th>Status</th>
+        <th
+          *ngFor="let column of tableConfiguration"
+          [pSortableColumn]="column.canSort ? column.key : ''"
+        >
+          {{ column.label }}
+          <p-sortIcon *ngIf="column.canSort" [field]="column.key"></p-sortIcon>
+        </th>
       </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-vehicle>
       <tr>
-        <td>{{ vehicle.name | vehicleName }}</td>
-        <td>{{ vehicle.manufacturer }}</td>
-        <td>{{ vehicle.model }}</td>
-        <td>{{ vehicle.type }}</td>
-        <td>{{ vehicle.fuelType }}</td>
-        <td>{{ vehicle.licensePlate }}</td>
-        <td>{{ vehicle.year }}</td>
-        <td>
-          <i
-            class="pi"
-            [ngClass]="{
-              'pi-check': vehicle.active,
-              'pi-times': !vehicle.active
-            }"
-            [ngStyle]="{ color: vehicle.active ? 'green' : 'red' }"
-          ></i>
+        <td *ngFor="let column of tableConfiguration; let isLast = last">
+          <ng-container *ngIf="column.key === 'status'; else defaultCell">
+            <i
+              class="pi"
+              [ngClass]="{
+                'pi-check': vehicle.active,
+                'pi-times': !vehicle.active
+              }"
+              [ngStyle]="{ color: vehicle.active ? 'green' : 'red' }"
+            ></i>
+          </ng-container>
+
+          <ng-template #defaultCell>
+            <span *ngIf="column.key === 'name'; else originalDisplayValue">
+              {{ vehicle[column.key] | vehicleName }}
+            </span>
+            <ng-template #originalDisplayValue>
+              {{ vehicle[column.key] }}
+            </ng-template>
+          </ng-template>
         </td>
       </tr>
     </ng-template>

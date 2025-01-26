@@ -1,8 +1,10 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { VehicleService } from './services/vehicle.service';
 import { VehicleModel } from './models/vehicle.model';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Table } from 'primeng/table';
+import { vehiclesTableConfiguration } from './models/vehicle.constants';
 
 @Component({
   selector: 'app-vehicles',
@@ -14,13 +16,14 @@ export class VehiclesComponent implements OnInit, OnDestroy {
   private vehicles: VehicleModel[] = [];
   private destroy$ = new Subject<void>();
 
+  tableConfiguration = vehiclesTableConfiguration;
   filteredVehicles$ = new BehaviorSubject<VehicleModel[]>([]);
 
   ngOnInit(): void {
     this.getVehicles();
   }
 
-  private getVehicles() {
+  private getVehicles(): void {
     this.vehicleService
       .getVehicles()
       .pipe(takeUntil(this.destroy$))

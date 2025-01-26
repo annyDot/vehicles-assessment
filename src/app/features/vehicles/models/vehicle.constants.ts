@@ -197,3 +197,24 @@ export const VEHICLES: VehicleModel[] = [
     active: true,
   },
 ];
+
+export const vehiclesTableConfiguration = [
+  { key: 'name', label: 'Vehicle Name', canSort: false, canFilter: false },
+  {
+    key: 'manufacturer',
+    label: 'Manufacturer',
+    canSort: false,
+    canFilter: false,
+  },
+  { key: 'model', label: 'Model', canSort: false, canFilter: false },
+  { key: 'type', label: 'Type', canSort: false, canFilter: false },
+  { key: 'fuelType', label: 'Fuel Type', canSort: false, canFilter: false },
+  {
+    key: 'licensePlate',
+    label: 'License Plate',
+    canSort: false,
+    canFilter: false,
+  },
+  { key: 'year', label: 'Year', canSort: true, canFilter: false },
+  { key: 'status', label: 'Status', canSort: false, canFilter: false },
+];

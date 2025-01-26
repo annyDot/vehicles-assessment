@@ -57,7 +57,6 @@ describe('HttpErrorInterceptor', () => {
     });
 
     const req = new HttpRequest('GET', '/test');
-
     const httpHandler: HttpHandler = {
       handle: (): Observable<any> => {
         return throwError(() => errorResponse);
