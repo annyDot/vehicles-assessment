@@ -50,7 +50,11 @@ export class AuthService implements OnDestroy {
   }
 
   logout(): void {
-    this.auth0.logout({ logoutParams: { returnTo: window.location.origin } });
+    this.auth0.logout({
+      logoutParams: {
+        returnTo: environment.logoutReturnURL,
+      },
+    });
     localStorage.clear();
     this.isAuthenticatedSubject$.next(false);
   }
