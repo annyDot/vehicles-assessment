@@ -16,7 +16,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `npm test test` to execute the unit tests via [Jest](https://jestjs.io/).
+Run `npm test` to execute the unit tests via [Jest](https://jestjs.io/).
 
 ## Running end-to-end tests
 
