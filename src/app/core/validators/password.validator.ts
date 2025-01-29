@@ -7,14 +7,12 @@ export function passwordValidator(): ValidatorFn {
     const password = control.value;
 
     const hasUpperCase = /[A-Z]/.test(password);
-    const hasLowerCase = /[a-z]/.test(password);
     const hasNumbers = /\d/.test(password);
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
     const isValidLength = password.length >= 8;
 
     const isValidPassword =
       hasUpperCase &&
-      hasLowerCase &&
       hasNumbers &&
       hasSpecialChar &&
       isValidLength;
